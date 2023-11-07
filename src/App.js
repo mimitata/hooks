@@ -3,6 +3,8 @@ import MovieList from './MovieList';
 import Filter from './Filter';
 import './style.css';
 import Addmovie from './Addmovie';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MovieDescription from './MovieDescription';
 function App() {
   const [movies, setMovies] = useState([
     {
@@ -61,9 +63,20 @@ function App() {
   return (
     <div className="app">
       <h1>Movie App</h1>
-      <Filter onFilterChange={handleFilterChange} />
-      <MovieList movies={filteredMovies} />
-      <Addmovie onAddMovie={addMovie} />
+     
+      <BrowserRouter>
+      <Routes>
+      <Route path="/" element={
+        <>
+              <Addmovie onAddMovie={addMovie} />
+         <Filter onFilterChange={handleFilterChange} />
+          <MovieList movies={filteredMovies} /></>
+      }>
+         
+        </Route>
+        <Route path="/movies/:id" element={<MovieDescription movies={movies}/>} />
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -2,9 +2,11 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link,useNavigate } from 'react-router-dom';
 
 
 const MovieCard = ({movie}) => {
+  const navigate=useNavigate()
     const { title, description, posterURL, rating } = movie;
 
   return (
@@ -17,10 +19,16 @@ const MovieCard = ({movie}) => {
         <h5>Description</h5> {description}<br></br>
         <h5>rating</h5> {rating}
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="primary" onClick={()=>{navigate(`/movies/${movie.title}`)}}>Go somewhere</Button>
       </Card.Body>
     </Card>
+    <Link to={`/movies/${movie.id}`}>
+      <div className="movie-card">
+        <h1>....</h1>
       </div>
+    </Link>
+      </div>
+      
   )
 }
 
